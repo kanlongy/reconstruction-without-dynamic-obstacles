@@ -12,6 +12,7 @@ set(CMAKE_CXX_FLAGS "-std=c++14 ${CMAKE_CXX_FLAGS} -O3 -Wall")
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+  rosbag
   std_msgs
   message_generation
   cv_bridge
@@ -138,7 +139,8 @@ include_directories(
 add_library(${PROJECT_NAME} include/${PROJECT_NAME}/occupancyMap.cpp
                             include/${PROJECT_NAME}/ESDFMap.cpp
                             include/${PROJECT_NAME}/raycast.cpp
-                            include/${PROJECT_NAME}/dynamicMap.cpp)
+                            include/${PROJECT_NAME}/dynamicMap.cpp
+                            include/${PROJECT_NAME}/reconstruction.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -153,6 +155,7 @@ add_executable(occupancy_map_node src/occupancy_map_node.cpp)
 add_executable(esdf_map_node src/esdf_map_node.cpp)
 add_executable(dynamic_map_node src/dynamic_map_node.cpp)
 add_executable(save_map_node src/save_map_node.cpp)
+add_executable(reconstruction_node src/reconstruction_node.cpp)
 
 
 ## Rename C++ executable without prefix
@@ -174,8 +177,8 @@ target_link_libraries(occupancy_map_node ${catkin_LIBRARIES} ${PROJECT_NAME})
 target_link_libraries(esdf_map_node ${catkin_LIBRARIES} ${PROJECT_NAME})
 target_link_libraries(dynamic_map_node ${catkin_LIBRARIES} ${PROJECT_NAME})
 target_link_libraries(save_map_node ${catkin_LIBRARIES} ${PROJECT_NAME})
-
-
+target_link_libraries(reconstruction_node ${catkin_LIBRARIES} ${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} onboard_detector)
 #############
 ## Install ##
 #############

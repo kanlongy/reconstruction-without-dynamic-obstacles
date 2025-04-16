@@ -1,0 +1,39 @@
+sensor_input_mode: 1 # 0 camera 1: lidar
+localization_mode: 0 # 0: pose (default) 1: odom
+dynamic_obstacle_filter_enable: true # false: off true: on
+depth_image_topic: /camera/depth/image_rect_raw
+color_image_topic: /camera/color/image_raw
+# depth_image_topic: /no_topic
+# pose_topic: /CERLAB/quadcopter/pose
+# odom_topic: /CERLAB/quadcopter/odom
+pose_topic: /mavros/local_position/pose
+odom_topic: /mavros/local_position/odom
+
+
+# Camera Parameters
+depth_intrinsics: [386.22674560546875, 386.22674560546875, 317.3930969238281, 239.78431701660156]
+# depth_intrinsics: [554.254691191187, 554.254691191187, 320.5, 240.5] # fx,  fy, cx, cy
+depth_scale_factor: 1000 # 1000 for Intel Realsense Camera
+depth_min_value: 0.5
+depth_max_value: 5.0
+depth_filter_margin: 2 # filter
+depth_skip_pixel: 10 # filter
+image_cols: 640
+image_rows: 480
+body_to_camera: [0.0,  0.0,  1.0,  0.09,
+                -1.0,  0.0,  0.0,  0.0 ,   
+                 0.0, -1.0,  0.0,  0.095,
+                 0.0,  0.0,  0.0,  1.0]
+body_to_lidar: [1, 0, 0, 0, 
+                0, 1, 0, 0, 
+                0, 0, 1, 0, 
+                0, 0, 0, 1] 
+                
+raycast_max_length: 5.0
+
+# Reconstruction Options
+
+# prebuilt_map_directory: "No"
+prebuilt_map_directory: "" #cancel pre .pcd
+save_map_directory: "/home/ye/Downloads/corridor_demo_new.pcd" 
+rosbag_directory: "/home/ye/Downloads/corridor_demo.bag"
